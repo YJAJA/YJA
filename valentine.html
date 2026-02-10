@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+      <style>
+
+
+        body{
+          font-family: arial;
+          height: 90vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-image: url("imgsrc/heartbckgrnd2.png");
+          background-position: center;
+          background-size: cover;
+
+        }
+
+        .container{
+          padding: 70px;
+          border: none;
+          border-radius: 15px;
+          text-align: center;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+          background-color: rgb(230, 94, 94);
+          
+          
+        }
+
+        img{
+          width: 250px;
+          border-radius: 20px;
+          display: block;
+          margin: auto;
+          margin-bottom: 20px;
+          
+
+        }
+
+        p{
+          margin: 0;
+          font-family: arial;
+          font-weight: bold;
+          font-size: 20px;
+          opacity: 1;
+          color: white;
+          
+        }
+
+        
+
+        label{
+          font-size: 20px;
+          margin-left: 8px ;
+          margin-right: 8px;
+        }
+
+        .b1{
+          margin-top: 20px;
+          cursor: pointer;
+          font-size: 25px;
+          width: 70px;
+          min-height: 40px;
+          border: none;
+          border-radius: 12px;
+          font-weight: bold;
+          background-color: pink;
+          color: white;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+          transition: transform 0.2s ease;
+          transition: 0.2s;
+
+        }   
+     
+        .b1:active{
+          background-color: white;
+          color: pink;
+        }
+          .b2{
+          margin-top: 20px;
+          cursor: pointer;
+          font-size: 25px;
+          width: 70px;
+          min-height: 40px;
+          border: none;
+          border-radius: 12px;
+          font-weight: bold;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+          transition: left 0.2s ease, top 0.2s ease ;
+        }
+
+          button:hover{
+
+          opacity: 0.9;
+        }
+
+        button{
+          opacity: 2;
+        }
+
+      </style>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="inside"> 
+        <img class="cat" src="imgsrc/valencat.jpg"     alt="cat">
+
+        <p class="p1">Will you be my Valentine?
+        </p>
+
+        <p>my cutie Sabby Sab :>></p>
+
+        <div>
+          <button class="b1" id="yes">Yes!</button>
+          <label>or</label>
+          <button class="b2" id="no">No.</button>
+        </div>
+      </div>
+       
+    </div>
+             <script src="valentine.js"></script>
+
+  </body>
+</html>
