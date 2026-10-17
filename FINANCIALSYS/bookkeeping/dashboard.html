@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="tl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+      background-color: rgb(33, 33, 33);
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      min-height: 100vh;
+      top: 0;
+      bottom: 0;
+      position: fixed;
+      left: 0;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 17px;
+      border-bottom: solid 1px lightgray;
+      margin-bottom: 20px;
+    }
+
+    .logo-box img {
+      width: 40px;
+      border-radius: 50px;
+    }
+
+    .logo-box p {
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      flex-direction: column;
+      display: flex;
+      flex: 1;
+      gap: 8px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .sidebar li {
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      padding: 10px 17px;
+      gap: 8px;
+    }
+
+    .sidebar li:hover {
+      transform: translateX(2px);
+      background-color: rgb(73, 73, 194);
+      transition: 0.3s;
+    }
+
+    .sidebar .active {
+      background-color: white;
+      color: rgb(73, 73, 194);
+      border-radius: 10px;
+    }
+
+    .sidebar li:hover svg {
+      transform: translateY(-3px) translateX(2px) rotate(-7deg) scale(1.1);
+      transition: 0.3s;
+    }
+
+    .sidebar span {
+      margin-left: 6px;
+    }
+
+    .logout-box {
+      border-top: solid 1px lightgray;
+      padding: 9px;
+    }
+
+    .logout-box a:hover {
+      color: red;
+      transform: translateX(20px);
+      transition: 0.3s;
+    }
+
+    /* ================= PAGE ================= */
+    .page {
+      margin-left: 250px;
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 7px;
+      height: 55px;
+      padding: 24px;
+      background-color: white;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      box-shadow:
+        0 -5px 5px rgba(0, 0, 0, 0.04),
+        0 5px 5px rgba(0, 0, 0, 0.04),
+        -5px 0 5px rgba(0, 0, 0, 0.04),
+        5px 0 5px rgba(0, 0, 0, 0.04);
+    }
+
+    .navbar-title {
+      color: rgb(35, 35, 35);
+      font-size: 15px;
+    }
+
+    .date-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-date {
+      color: rgb(31, 31, 31);
+    }
+
+    .navbar-profile {
+      padding: 7px;
+      background-color: white;
+      border-radius: 10px;
+      color: rgb(35, 35, 35);
+      display: flex;
+      justify-content: center;
+      margin-right: 250px;
+      box-shadow:
+        0 -5px 5px rgba(0, 0, 0, 0.06),
+        0 5px 5px rgba(0, 0, 0, 0.06),
+        -5px 0 5px rgba(0, 0, 0, 0.06),
+        5px 0 5px rgba(0, 0, 0, 0.06);
+      transition: 0.2s;
+      border: solid 1px rgb(241, 241, 255);
+    }
+
+    .navbar-profile:hover {
+      transform: scale(1.04);
+    }
+
+    .navbar-profile:active {
+      transform: scale(1);
+      color: white;
+      border: solid 1px white;
+      background-color: rgb(73, 73, 194);
+    }
+
+    /* ================= CONTENT ================= */
+    .content {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    /* ===== CARDS SA TAAS (sec-1) ===== */
+    .sec-1 {
+      display: flex;
+      animation: slideUp 1.7s ease;
+    }
+
+    .card-box {
+      display: flex;
+      flex: 1;
+      gap: 15px;
+      flex-wrap: wrap;           /* bababa ang card kapag masikip */
+    }
+
+    .cards {
+      display: flex;
+      flex: 1 1 220px;           /* minimum na lapad ng card ay 220px */
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      border: solid 1px rgb(215, 215, 215);
+      border-radius: 8px;
+      box-shadow:
+        0 -5px 5px rgba(0, 0, 0, 0.04),
+        0 5px 5px rgba(0, 0, 0, 0.04),
+        -5px 0 5px rgba(0, 0, 0, 0.04),
+        5px 0 5px rgba(0, 0, 0, 0.04);
+    }
+
+    .cards svg {
+      background-color: rgb(241, 241, 255);
+      color: rgb(73, 73, 194);
+      padding: 12px;
+      border-radius: 8px;
+      flex-shrink: 0;            /* hindi mapipiga ang icon */
+    }
+
+    .cards h5 {
+      color: gray;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .cards h3 {
+      color: rgb(35, 35, 35);
+    }
+
+    /* ===== RECENT TRANSACTIONS (sec-2) ===== */
+    .sec-2 {
+      display: flex;
+      animation: slideUp 2s ease;
+    }
+
+    .recent-box {
+      flex: 1;
+      min-width: 0;
+      padding: 20px;
+      border: solid 1px rgb(215, 215, 215);
+      border-radius: 8px;
+      box-shadow:
+        0 -5px 5px rgba(0, 0, 0, 0.04),
+        0 5px 5px rgba(0, 0, 0, 0.04),
+        -5px 0 5px rgba(0, 0, 0, 0.04),
+        5px 0 5px rgba(0, 0, 0, 0.04);
+    }
+
+    .recent-title {
+      margin-bottom: 15px;
+    }
+
+    .recent-title h3 {
+      color: rgb(73, 73, 194);
+    }
+
+    .recent-title p {
+      color: gray;
+      font-size: 14px;
+    }
+
+    /* Balot ng table para may border radius at scroll */
+    .table-wrap {
+      border: solid 1px rgb(215, 215, 215);
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 350px;
+    }
+
+    .recent-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .recent-table th {
+      background-color: rgb(73, 73, 194);
+      color: white;
+      font-size: 14px;
+      text-align: left;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+    }
+
+    .recent-table td {
+      font-size: 14px;
+      padding: 10px;
+      border-bottom: solid 1px rgb(235, 235, 235);
+    }
+
+    .recent-table .amount {
+      text-align: right;
+    }
+
+    .recent-table .empty {
+      text-align: center;
+      color: gray;
+      font-style: italic;
+      padding: 25px;
+      border-bottom: none;
+    }
+
+    /* ===== ANIMATION ===== */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+
+    /* ================= MOBILE ================= */
+    @media (max-width: 768px) {
+
+      .sidebar {
+        width: 75px;
+      }
+
+      .navbar-profile {
+        margin-right: 65px;
+      }
+
+      .page {
+        margin-left: 75px;
+      }
+
+      .content {
+        padding: 16px;
+      }
+
+      .logo-box p {
+        display: none;
+      }
+
+      .sidebar span {
+        display: none;
+      }
+
+      .sidebar a {
+        justify-content: center;
+      }
+
+      .sidebar a:hover {
+        color: white;
+      }
+
+      .sidebar .li-1:hover,
+      .sidebar .li-2:hover,
+      .sidebar .li-3:hover,
+      .sidebar .li-4:hover,
+      .sidebar .li-5:hover {
+        background-color: rgb(73, 73, 194);
+        transform: translateX(20px) scale(1.1);
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar .active {
+        color: rgb(73, 73, 194);
+      }
+
+      .sidebar .active:hover {
+        color: rgb(73, 73, 194);
+      }
+
+      .navbar-title {
+        font-size: 13px;
+      }
+
+      .navbar-date {
+        font-size: 12px;
+      }
+
+      .logout-box a:hover {
+        transform: translateX(0px);
+      }
+
+      .recent-table th,
+      .recent-table td {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <div class="logo-box">
+      <img src="/imgsrc/crtlogo.png">
+
+      <p>CRT Financial<br>System</p>
+    </div>
+
+    <ul>
+      <li class="li-1">
+        <a href="dashboard.html" class="active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1" />
+            <rect width="7" height="5" x="14" y="3" rx="1" />
+            <rect width="7" height="9" x="14" y="12" rx="1" />
+            <rect width="7" height="5" x="3" y="16" rx="1" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="li-2">
+        <a href="transaction.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m10 16 4-4-4-4" />
+            <path d="M3 12h11" />
+            <path d="M3 8V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
+          </svg>
+          <span>Transaction</span>
+        </a>
+      </li>
+
+      <li class="li-3">
+        <a href="journal.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 6h4" />
+            <path d="M2 10h4" />
+            <path d="M2 14h4" />
+            <path d="M2 18h4" />
+            <rect width="16" height="20" x="4" y="2" rx="2" />
+            <path d="M16 2v20" />
+          </svg>
+          <span>General Journal</span>
+        </a>
+      </li>
+
+      <li class="li-4">
+        <a href="trialbalance.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
+            <path d="M2 6h4" />
+            <path d="M2 10h4" />
+            <path d="M2 14h4" />
+            <path d="M2 18h4" />
+            <path
+              d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+          </svg>
+          <span>Trial Balance</span>
+        </a>
+      </li>
+
+      <li class="li-5">
+        <a href="financialSt.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+            <line x1="3" x2="21" y1="9" y2="9" />
+            <line x1="3" x2="21" y1="15" y2="15" />
+            <line x1="9" x2="9" y1="9" y2="21" />
+            <line x1="15" x2="15" y1="9" y2="21" />
+          </svg>
+          <span>Financial Statements</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="logout-box">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" x2="9" y1="12" y2="12" />
+        </svg>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ================= LAHAT NG NASA KANAN NG SIDEBAR ================= -->
+  <div class="page">
+
+    <!-- Navbar sa taas -->
+    <header class="navbar">
+      <div class="navbar-title">
+        <h3>Dashboard</h3>
+      </div>
+
+      <div class="date-profile">
+        <div>
+          <span id="currentDate" class="navbar-date"></span>
+        </div>
+        <div class="navbar-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
+            <circle cx="12" cy="11" r="4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ================= CARDS ================= -->
+      <section class="sec-1">
+        <div class="card-box">
+
+          <div class="cards">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+              <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+              <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+            </svg>
+            <div>
+              <h5>Total Assets</h5>
+              <h3 id="dashAssets">₱0.00</h3>
+            </div>
+          </div>
+
+          <div class="cards">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 12h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 14" />
+              <path d="m7 18 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+              <path d="m2 13 6 6" />
+            </svg>
+            <div>
+              <h5>Total Liabilities</h5>
+              <h3 id="dashLiabilities">₱0.00</h3>
+            </div>
+          </div>
+
+          <div class="cards">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              <rect width="20" height="14" x="2" y="6" rx="2" />
+            </svg>
+            <div>
+              <h5>Total Equity</h5>
+              <h3 id="dashEquity">₱0.00</h3>
+            </div>
+          </div>
+
+          <div class="cards">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+              <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+              <path d="m2 16 6 6" />
+              <circle cx="16" cy="9" r="2.9" />
+              <circle cx="6" cy="5" r="3" />
+            </svg>
+            <div>
+              <h5>Net Income</h5>
+              <h3 id="dashNetIncome">₱0.00</h3>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= RECENT TRANSACTIONS ================= -->
+      <section class="sec-2">
+        <div class="recent-box">
+
+          <div class="recent-title">
+            <h3>Recent Transactions</h3>
+            <p>Your latest recorded transactions</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="recent-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+
+              <tbody id="recentRows">
+                <tr>
+                  <td colspan="4" class="empty">No records yet</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    document.getElementById("currentDate").textContent =
+      new Date().toLocaleDateString("en-US", options);
+  </script>
+
+</body>
+
+</html>
