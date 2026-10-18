@@ -1,0 +1,531 @@
+/* ================= MGA KULAY (palitan dito kung gusto ng ibang kulay) ================= */
+:root {
+  --sidebar: #14332e;      /* madilim na green ng sidebar */
+  --accent: #1f7a63;       /* hover at buttons */
+  --accent-dark: #17604d;  /* hover ng buttons, active na text */
+  --bg: #f3f6f4;           /* background ng page */
+  --text: #1d2b27;
+  --muted: #5f716b;
+  --line: #dfe7e3;         /* kulay ng mga border */
+  --head: #e8f0ed;         /* header ng table */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Manrope", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  background-color: var(--sidebar);
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  min-height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 17px;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.25);
+  margin-bottom: 20px;
+}
+
+.logo-box img {
+  width: 40px;
+  border-radius: 50px;
+}
+
+.logo-box p {
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.sidebar ul {
+  list-style: none;
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.sidebar li {
+  border-radius: 10px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px 17px;
+  gap: 8px;
+}
+
+/* plain hover: kulay lang ang nagbabago, walang gumagalaw */
+.sidebar li:hover {
+  background-color: var(--accent);
+}
+
+.sidebar .active {
+  background-color: white;
+  color: var(--accent-dark);
+  border-radius: 10px;
+}
+
+.logout-box {
+  border-top: solid 1px rgba(255, 255, 255, 0.25);
+  padding: 9px;
+}
+
+.logout-box a:hover {
+  color: #ff8a80;
+}
+
+/* ================= PAGE (lahat ng nasa kanan ng sidebar) ================= */
+.page {
+  margin-left: 250px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  padding: 0 24px;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 250px;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-title {
+  color: rgb(35, 35, 35);
+  font-size: 15px;
+}
+
+.date-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-date {
+  color: rgb(31, 31, 31);
+}
+
+.navbar-profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #dff0e8;
+  color: var(--accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.navbar-profile:hover {
+  background-color: #c6e4d8;
+}
+
+.navbar-profile:active {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* ================= CONTENT ================= */
+.content {
+  margin-top: 55px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border: solid 1px var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.card h2 {
+  font-size: 18px;
+}
+
+.card .sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 2px 0 16px 0;
+}
+
+/* form sa kaliwa (sec-1), journal preview sa kanan (sec-2) */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* dalawang magkatabing table (Income Statement at Balance Sheet) */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ================= DASHBOARD CARDS ================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.summary-card {
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.summary-card p {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.summary-card h2 {
+  font-size: 24px;
+  margin-top: 6px;
+}
+
+.c-cash {
+  background-color: #dff0e8;
+  color: #17604d;
+}
+
+.c-revenue {
+  background-color: #dfecf6;
+  color: #1d5a85;
+}
+
+.c-expense {
+  background-color: #fbe8d6;
+  color: #9a4d10;
+}
+
+.c-income {
+  background-color: #ece6f5;
+  color: #55388a;
+}
+
+/* ================= TABLES ================= */
+/* scroll pababa kapag humaba, scroll pakaliwa/pakanan kapag mobile */
+.table-scroll {
+  overflow: auto;
+  max-height: 420px;
+  border: solid 1px var(--line);
+  border-radius: 10px;
+}
+
+.table-scroll.tall {
+  max-height: calc(100vh - 230px);
+  min-height: 260px;
+}
+
+.table-scroll.no-limit {
+  max-height: none;
+}
+
+table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th,
+td {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: solid 1px var(--line);
+  white-space: nowrap;
+}
+
+th {
+  background-color: var(--head);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tfoot td {
+  font-weight: 700;
+  background-color: var(--head);
+  position: sticky;
+  bottom: 0;
+  border-bottom: none;
+}
+
+td.desc {
+  white-space: normal;
+  min-width: 180px;
+}
+
+td.indent {
+  padding-left: 36px;
+}
+
+.num {
+  text-align: right;
+}
+
+/* simula ng bawat journal entry */
+.entry-start td {
+  border-top: solid 2px #c3d3cc;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 28px 14px;
+  white-space: normal;
+}
+
+.fs-table {
+  min-width: 340px;
+}
+
+.section-row td {
+  font-weight: 700;
+  background-color: var(--bg);
+}
+
+.total-row td {
+  font-weight: 700;
+  border-top: solid 1px #9db4ab;
+}
+
+.grand td {
+  font-weight: 700;
+  background-color: #dff0e8;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.b-revenue {
+  background-color: #dff0e8;
+  color: #17604d;
+}
+
+.b-expense {
+  background-color: #fbe8d6;
+  color: #9a4d10;
+}
+
+.b-asset {
+  background-color: #dfecf6;
+  color: #1d5a85;
+}
+
+.b-equity {
+  background-color: #ece6f5;
+  color: #55388a;
+}
+
+.b-drawing {
+  background-color: #e9e9e9;
+  color: #444;
+}
+
+.note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ================= FORM ================= */
+.form-group {
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: solid 1px #c5d3cd;
+  border-radius: 8px;
+  font: inherit;
+  background-color: white;
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+select:disabled {
+  background-color: var(--bg);
+  color: var(--muted);
+}
+
+.btn {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--accent-dark);
+}
+
+.btn-light {
+  margin-top: 10px;
+  background-color: white;
+  color: #9b2c22;
+  border: solid 1px #e3b8b3;
+}
+
+.btn-light:hover {
+  background-color: #fdf0ee;
+}
+
+.message {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.message.error {
+  color: #b3261e;
+}
+
+.message.success {
+  color: var(--accent-dark);
+}
+
+.message a {
+  color: var(--accent-dark);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1199px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 991px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* sidebar at page margin ay parehong 75px */
+  .sidebar {
+    width: 75px;
+  }
+
+  .page {
+    margin-left: 75px;
+  }
+
+  .navbar {
+    left: 75px;
+    padding: 0 16px;
+  }
+
+  .navbar-title {
+    font-size: 13px;
+  }
+
+  .navbar-date {
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .logo-box {
+    justify-content: center;
+    padding: 17px 0;
+  }
+
+  .logo-box p,
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar a {
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .summary-card h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

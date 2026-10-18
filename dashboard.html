@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | CRT Accounting System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <div class="logo-box">
+      <img src="imgsrc/crtlogo.png" alt="CRT logo">
+
+      <p>CRT Accounting System</p>
+    </div>
+
+    <ul>
+      <li>
+        <a href="dashboard.html" class="active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18" />
+            <path d="M7 15v3" />
+            <path d="M12 10v8" />
+            <path d="M17 6v12" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="transaction.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m17 3 4 4-4 4" />
+            <path d="M21 7H8" />
+            <path d="m7 21-4-4 4-4" />
+            <path d="M3 17h13" />
+          </svg>
+          <span>Transaction</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="journal.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 7v14" />
+            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+          </svg>
+          <span>General Journal</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="trialbalance.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+            <path d="M7 21h10" />
+            <path d="M12 3v18" />
+            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
+          </svg>
+          <span>Trial Balance</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="financialSt.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+            <path d="M10 9H8" />
+            <path d="M16 13H8" />
+            <path d="M16 17H8" />
+          </svg>
+          <span>Financial Statements</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="logout-box">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v10" />
+          <path d="M18.4 6.6a9 9 0 1 1-12.77.04" />
+        </svg>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ================= LAHAT NG NASA KANAN NG SIDEBAR ================= -->
+  <div class="page">
+
+    <!-- Navbar sa taas -->
+    <header class="navbar">
+      <div class="navbar-title">
+        <h3>Dashboard</h3>
+      </div>
+
+      <div class="date-profile">
+        <div>
+          <span id="currentDate" class="navbar-date"></span>
+        </div>
+        <div class="navbar-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <section class="cards">
+        <div class="summary-card c-cash">
+          <p>Cash</p>
+          <h2 id="cardCash">₱0</h2>
+        </div>
+        <div class="summary-card c-revenue">
+          <p>Total Revenue</p>
+          <h2 id="cardRevenue">₱0</h2>
+        </div>
+        <div class="summary-card c-expense">
+          <p>Total Expenses</p>
+          <h2 id="cardExpenses">₱0</h2>
+        </div>
+        <div class="summary-card c-income">
+          <p>Net Income</p>
+          <h2 id="cardIncome">₱0</h2>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Recent Transactions</h2>
+        <p class="sub">Latest transactions are on top.</p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th class="num">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="recentBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    showDashboard();
+  </script>
+
+</body>
+
+</html>
